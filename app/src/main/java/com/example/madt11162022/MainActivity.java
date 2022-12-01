@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView lvItems;
     private TextView tvStatus;
     private ArrayAdapter listAdapter;
-    private Switch swAsyncTask;
+    private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +29,16 @@ public class MainActivity extends AppCompatActivity {
 
         this.lvItems = findViewById(R.id.lv_Items);
         this.tvStatus = findViewById(R.id.tv_status);
-        this.swAsyncTask = findViewById(R.id.asyncTask);
+        this.btn = findViewById(R.id.btnGetData);
 
         this.listAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, new ArrayList<>());
         this.lvItems.setAdapter(this.listAdapter);
     }
 
-    public void onBtnGetData(View view){
+    public void onBtnGetDataClick(View view){
         this.tvStatus.setText("Loading data...");
-        if(this.swAsyncTask.isChecked()){
-            Toast.makeText(this, "Please switch the button", Toast.LENGTH_LONG).show();
-        }else{
-            getDataByAsyncTask();
-            Toast.makeText(this, "Using AsyncTask for FloatRates", Toast.LENGTH_LONG).show();
-
-        }
+        getDataByAsyncTask();
+        Toast.makeText(this, "Using AsyncTask for FloatRates", Toast.LENGTH_LONG).show();
     }
 
     public void getDataByAsyncTask(){
